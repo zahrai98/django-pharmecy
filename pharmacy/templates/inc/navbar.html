@@ -1,0 +1,54 @@
+
+<div class="clearfix" style="background-color:#27519b;text-align: center;font-family: lalezar;">
+  <a class="navbar-brand" href="{% url 'medicine:home' %}"><h1 style="text-align: center;color:white;">داروخانه نیکو</h1></a>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #3f9fd2;font-family: lalezar;">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'medicine:home' %}">صفحه اول</a>
+        </li>
+         {%  if request.user.is_authenticated %}
+
+        <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">کاربر</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'accounts:profile' %}">مشاهده پروفایل</a>
+      <a class="dropdown-item" href="{% url 'accounts:reset_pass' %}">تغییر رمز عبور</a>
+      <a class="dropdown-item" href="{% url 'accounts:orders' %}">سفارش های من</a>
+      <a class="dropdown-item" href="{% url 'cart:detail' %}">سبد خرید</a>
+      <div class="dropdown-divider"></div>
+      {% if request.user.is_admin %}
+        <a class="dropdown-item" href="{% url 'report:report' %}">گزارش</a>
+      {% else %}
+        <a class="dropdown-item" href="{% url 'accounts:relation' %}">ارتباط با ما</a>
+      {% endif %}
+         </div>
+  </li>
+          <li class="nav-item">
+    <a class="nav-link" href="{% url 'accounts:logout' %}">خروج</a>
+  </li>
+
+    {% else %}
+    <li class="nav-item">
+    <a class="nav-link" href="{% url 'accounts:login' %}">ورود</a>
+    </li>
+    <li class="nav-item"  >
+    <a class="nav-link" href="{% url 'accounts:register' %}">ثبتنام</a>
+    </li>
+    {% endif %}
+
+
+      </ul>
+
+
+    </div>
+  </div>
+  <form class="d-flex" dir="ltr" action="{% url 'medicine:search' %}">
+        <input class="form-control me-2" type="search" placeholder="جستجو" aria-label="Search"  name="search">
+        <button class="btn btn-outline-success" type="submit">جستجو</button>
+      </form>
+</nav>
+

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}information{% endblock %}
+{% block content %}
+    <h3>اطلاعات </h3>
+    <form action="" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <input type="submit" value="تایید">
+    </form>
+{% endblock %}

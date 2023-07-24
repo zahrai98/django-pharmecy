@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}سفارش{% endblock %}
+{% block content %}
+    <h3>بررسی</h3>
+    <p>کل محصولات: {{ order.get_total_price }} </p>
+    <p> هزینه پست پانزده هزار تومان</p>
+    <p>هزینه کل:{{ total_price }}</p>
+    <form action="{% url 'orders:coupon_apply' order.id %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="اعمال">
+    </form>
+    <a href="{% url 'orders:payment' order.id order.get_total_price %}">پرداخت </a>
+
+{% endblock %}

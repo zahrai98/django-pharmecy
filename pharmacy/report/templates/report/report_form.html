@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}فرم{% endblock %}
+{% block content %}
+    <h3>تاریخی که میخواهید گزارش گرفته شود و نوع گزارش را وارد کنید </h3>
+    <form action="" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <input type="submit" value="گزارش">
+    </form>
+
+    {% if orders %}
+        <p>لیست گزارش ها</p>
+        {% include 'orders/inc/order_list.html' %}
+    {% endif %}
+{% endblock %}

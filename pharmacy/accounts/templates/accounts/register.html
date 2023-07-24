@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}ثبتنام{% endblock %}
+{% block content %}
+    <p>فرم ثبتنام</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn btn-primary" value="ثبتنام">
+    </form>
+{% endblock %}

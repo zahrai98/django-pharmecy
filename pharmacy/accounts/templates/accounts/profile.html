@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}پروفایل{% endblock %}
+{% block content %}
+    <p>اطلاعات  </p>
+    <p>ایمیل {{ user.email }}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-primary" value="ویرایش">
+    </form>
+{% endblock %}

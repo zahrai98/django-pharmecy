@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}سفارش ها{% endblock %}
+{% block content %}
+    <p>سفارش : {{ order }} </p>
+    <p>تاریخ : {{ order.created }} </p>
+    <p>آدرس :{{ order.addres }}</p>
+    <p>کدپستی :{{ order.code_post }}</p>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">نام محصول</th>
+                <th scope="col"> قیمت</th>
+                <th scope="col">تعداد </th>
+                <th scope="col">قیمت کل</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in order.items.all %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ item.product }}</td>
+                <td>{{ item.price }}</td>
+                <td> {{ item.quantity }}</td>
+                <td>{{ item.get_cost }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+                <td>تخفیف به درصد</td>
+                <td colspan="3"></td>
+                <td>{{ order.discount }}</td>
+            </tr>
+        <tr>
+                <td>کل</td>
+                <td colspan="3"></td>
+                <td>{{ order.get_total_price }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% if order.paid %}
+        <p>این سفارش پرداخت شده </p>
+    {% else %}
+        <a href="{% url 'orders:order_remove' order.id %}"> حذف این سفارش </a>
+    {% endif %}
+{% endblock %}

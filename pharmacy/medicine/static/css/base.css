@@ -1,0 +1,10 @@
+
+@font-face {
+    font-family: lalezar ;
+    src: local('lalezar'), url('Lalezar-Regular.ttf') format('opentype');
+}
+
+
+body {
+    font-family: lalezar ;
+}

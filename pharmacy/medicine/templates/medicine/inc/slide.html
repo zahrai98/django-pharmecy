@@ -1,0 +1,39 @@
+{% load static %}
+    <div id="demo" class="carousel carousel-dark slide" data-ride="carousel" style="color:black;">
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner" >
+            <div class="carousel-item active">
+                <a href="{% url 'medicine:product_detail' 'ماسک-چند-لایه' %}" ><img src="{% static 'img/anzani-toosi1.jpg' %}" alt=" ماسک" width="100%" height="500" ></a>
+                <div class="carousel-caption" style="color:black;"></a>
+                    <h3> ماسک</h3>
+                    <p>ماسک چند لایه </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="{% url 'medicine:product_detail' 'الکل-زنجان' %}" ><img src="{% static 'img/new-komakol.jpg' %}" alt="الکل"  width="100%" height="500"></a>
+                <div class="carousel-caption" style="color:black;">
+                    <h3 >الکل</h3>
+                    <p>الکل زنجان !</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="{% url 'medicine:product_detail' 'gain-bolic' %}" ><img src="{% static 'img/gain-bolic-olimp.jpg' %}" alt=" gain-bolic" width="100%" height="500"></a>
+                <div class="carousel-caption" style="color:black;">
+                    <h3>gain-bolic</h3>
+                    <p>   gain-bolic</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+
+

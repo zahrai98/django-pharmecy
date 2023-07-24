@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}detail{% endblock %}
+{% block content %}
+
+<img src="{{ product.image.url }}"  alt="{{ product.name }}" class="float-right" style="width:30%;heigh:500px;margin:2%;">
+<div style="margin-bottom:350px;margin-top:2%">
+<h5 >{{ product.name }}</h5>
+        <p >توضیحات: {{ product.description }}</p>
+        <p ><small class="text-muted">تولید: {{ product.date_of_manufacture }} </small></p>
+          <p ><small class="text-muted">انقضا: {{ product.expiration_date }}</small></p>
+          <p ><small class="text-muted"> قیمت :{{ product.price }} تومان</small></p>
+
+</div>
+     {% if request.user.is_authenticated %}
+    <form action="{% url 'cart:cart_add' product.id %}" method="post" style="margin-top:2%;">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="افزودن به سبد خرید">
+    </form>
+
+
+
+    <form action="" method="post" style="margin-top:2%;">
+        {% csrf_token %}
+        {{ comment_form }}
+        <br>
+        <input type="submit" value="افزودن نظر ">
+    </form>
+    {% else %}
+        <p>تنها کاربران میتوانند نظر بدهند</p>
+    {% endif %}
+
+     {% with total=page_obj.paginator.count %}
+        <p>برای این محصول {{ total }} نظر وجود داره</p>
+    {% endwith %}
+
+{% for comment in page_obj %}
+        <div class="card" style="background-color:#fec0cd;padding:2%">
+            <p class="card-header" >{{ comment.user }}</p>
+            <p class="card-body">{{ comment.body }}</p><small>{{ comment.created}}</small>
+            {% for reply in comment.rcomment.all %}
+                <p class="bg-primary text-white p-3 m-5">{{ reply.user}}<br>{{ reply.body}}</p>
+            {% endfor %}
+        </div>
+    {% empty %}
+        <p>کامنتی وجود ندارد</p>
+    {% endfor %}
+
+    {% include 'medicine/inc/pagination.html' %}
+{% endblock %}

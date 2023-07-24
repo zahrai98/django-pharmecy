@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}خانه{% endblock %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="btn-group">
+        <a href="{% url 'medicine:home' %}" class="btn btn-primary">برند ها</a>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </button>
+        <div class="dropdown-menu">
+            {% for brand in brands %}
+                <a class="dropdown-item" href="{{ brand.get_absolute_url }}">{{ brand.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% for category in categories %}
+
+        <div class="btn-group dropstart">
+            <a href="{{ category.get_absolute_url }}" class="btn btn-primary">{{ category.name }}</a>
+             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu">
+                {% for sub in category.scategory.all %}
+                        <a class="dropdown-item" href="{{ sub.get_absolute_url }}">{{ sub.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+<br><br><br>
+
+<div style="width:60%;display:inline-block;border: 5px solid  #5cb5af;">
+{% include 'medicine/inc/slide.html' %}
+</div>
+
+
+            <div class="coupon" style="width:30%; height:200px;margin:1%;display:inline-block;border: 5px dotted #5cb5af;">
+
+                <div class="container" style="heigh:100px;">
+                    <h5 > gain-bolic-olimp</h5>
+                </div>
+
+                <a href="{% url 'medicine:product_detail' 'gain-bolic' %}" >
+                    <img src="{% static 'img/gain-bolic-olimp.jpg' %}" alt=" gain-bolic" width="150px" height="150px" margin-top="2%" class="card-img-top" alt="{{ product.name }}"></a>
+
+                <div class="container" style="background-color:white">
+                <h2><b>gain-bolic-olimp</b></h2>
+                <p>perfect</p>
+                </div>
+                <div class="container" style="padding:1%;margin-top:2%;">
+                    <p>قیمت: <span class="promo"><del style="color:red;">30000</del> 20000</span> تومان</p>
+
+            </div>
+        </div>
+<br><br>
+<div style="border: 5px outset  #e97790;margin-top:100px;padding:5px">
+<div style="padding: 30px;text-align: center;background-color:#fec0cd;margin:5% 10%">
+    <h3>محصولات   </h3>
+</div>
+<hr>
+    {% for product in products %}
+        
+            <div class="coupon" style="width:28%; height:320px;display:inline-block;margin:1%">
+                <a href="{{ product.get_absolute_url }}" >
+                <div class="container" style="heigh:100px;">
+                    <h5 > {{ product.name }}</h5>
+                </div></a>
+                {% thumbnail product.image "200x200" as im %}
+                    <img src="{{ im.url }}" width="150px" height="150px" margin-top="2%" class="card-img-top" alt="{{ product.name }}">
+                {% endthumbnail %}
+                <div class="container" style="background-color:white">
+                <h2><b></b></h2>
+                <p></p>
+                </div>
+                <div class="container" style="padding:1%;margin-top:2%;">
+                {% if product.discount == 0 %}
+                    <p>قیمت: <span class="promo">{{ product.price }}</span> تومان</p>
+               {% else %}
+                    <p>قیمت: <span class="promo"><del style="color:red;">{{ product.price }}</del> {{ product.get_discount_price}}</span> تومان</p>
+                {% endif %}
+
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+
+ 
+
+  <div style="margin:70px  20% 70px 20%;padding:10px;border: 5px ridge  #eeb156;">
+    <img src="{% static 'img/Instagram-profile-photos-1.jpg' %}" alt="Avatar" style="width:300px;height:300px;float:left;">
+    <div style="padding-bottom: 120px;">
+    <h1>مژده مژده</h1> 
+        <h4>صفحه اینستاگرام</h4> 
+        <p>به صفحه اینستاگرام داروخانه نیکو بپیوندید.
+            جهت بهره مندی از کد های تخفیف تا سقف 50 درصد برای محصولات آرایشی و بهداشتی می توانید به عضو پیج اینستگرام داروخانه نیکو شوید.</p>
+        <p>@drug_store_rajaee</p>
+        </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}جزئیات{% endblock %}
+{% block content %}
+    <p>سبد خرید </p>
+        {% include 'cart/inc/item_list.html' %}
+
+    <a href="{% url 'orders:create' %}" class="btn btn-primary">ثبت کردن</a>
+{% endblock %}

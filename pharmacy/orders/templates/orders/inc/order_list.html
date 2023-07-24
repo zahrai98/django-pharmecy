@@ -1,0 +1,43 @@
+<p>سفارش ها </p>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">آیدی</th>
+                <th scope="col">تاریخ ایجاد</th>
+                <th scope="col">تاریخ ویرایش</th>
+                <th scope="col">وضعیت پرداخت</th>
+                <th scope="col">وضعیت سفارش </th>
+                <th scope="col">قیمت کل</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ order.id }}</td>
+                <td>{{ order.created }}</td>
+                <td>{{ order.updated }}</td>
+                {% if  order.paid %}
+                <td>پرداخت شده</td>
+                {% else %}
+                <td>پرداخت نشده</td>
+                {% endif %}
+
+                {% if order.status == 'paid' %}
+                    <td>ثبت و پرداخت شده</td>
+                {% endif %}
+                {% if order.status == 'sended' %}
+                    <td>ارسال شده</td>
+                {% endif %}
+                {% if order.status == 'registered' %}
+                    <td> ثبت شده</td>
+                {% endif %}
+
+                <td>{{ order.get_total_price }}</td>
+                <td><a href="{% url 'orders:order_detail' order.id %}">مشاهده جزئیات</a></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
